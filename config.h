@@ -6,25 +6,30 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10", "FontAwesome:size=8" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#1F1F1F";
-static const char col_gray2[]       = "#1F1F1F";
-static const char col_gray3[]       = "#BBBBBB";
-static const char col_white[]       = "#FFFFFF";
-static const char col_cyan[]        = "#1F1F1F";
-static const char col_purple[]      = "#BD1550";
-static const char col_red[]         = "#ee4444";
-static const char col_dblue[]       = "#0c1a1a";
-static const char col_blue[]        = "#242f4b";
-static const char col_brown[]       = "#655635";
+static const char *fonts[]          = { "monospace:size=8", "FontAwesome:size=8" };
+static const char dmenufont[]       = "monospace:size=8";
 
-static const char *colors[][3]      = {
+static const char col_front[]       = "#BBBBBB"; /* Foreground */
+static const char col_border[]      = "#242f4b"; /* Border */
+static const char col_back[]        = "#1F1F1F"; /* Background */
+
+static const char col_white[]       = "#FFFFFF"; /* White */
+static const char col_red[]         = "#BF616A"; /* Red */
+static const char col_blue[]        = "#242f4b"; /* Blue */
+static const char col_green[]       = "#A3BE8C"; /* Green */
+static const char col_yellow[]      = "#EBCB8B"; /* Yellow */
+static const char col_cyan[]        = "#88C0D0"; /* Cyan */
+
+static const char *colors[][8]      = {
 	/*					fg         bg          border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_blue  },
-	[SchemeSel]  = { col_white, col_gray1, col_brown },
-	[SchemeWarn] =	 { col_red,   col_blue,  col_blue  },
-	[SchemeUrgent]=	 { col_white, col_red,   col_red   },
+	[SchemeNorm] =	 { col_front, col_back,   col_blue  }, /* Norm */
+	[SchemeSel]  =	 { col_white, col_back,   col_blue  }, /* Bright */
+	[SchemeWarn] =	 { col_red,   col_back,   col_blue  }, /* Red Warning*/
+	[SchemeUrgent]=	 { col_blue,  col_back,   col_blue  }, /* Urgent */
+    [SchemeGreen] =  { col_green, col_back,   col_blue  }, /* Green */
+    [SchemeRed]   =  { col_red,   col_back,   col_blue  }, /* Red */
+    [SchemeBlue]  =  { col_blue,  col_back,   col_blue  }, /* Blue */
+    [SchemeYellow]=  { col_yellow,col_back,   col_blue  }, /* Yellow */
 };
 
 /* tagging */
@@ -84,7 +89,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_w,      togglebar,      {0} },
-        { MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
+    { MODKEY,                       XK_r,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -118,6 +123,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+	{ MODKEY|ShiftMask,             XK_r,      quit,           {.i = 23} }, /* Reload without quit */
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
